@@ -1,0 +1,17 @@
+Usando PCL 1.7.2
+
+Convertir de STL a PLY => meshlabserver -i input.stl -o output.ply
+
+Leer PLY a PCD ->  pcl_ply2pcd input.ply output.pcd
+
+
+No funciono
+
+sudo apt-get install snapd
+sudo snap install cloudcompare
+
+
+cloudcompare.CloudCompare
+
+(abrir STL y guardarlo despues)
+pcl_vtk2pcd Mesh.vtk mesh.pcd
