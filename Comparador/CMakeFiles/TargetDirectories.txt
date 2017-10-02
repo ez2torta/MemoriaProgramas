@@ -1,0 +1,1 @@
+/home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/CMakeFiles/comparator.dir

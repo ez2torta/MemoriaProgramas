@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/voxel_grid.cpp" "/home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/CMakeFiles/voxel_grid.dir/voxel_grid.cpp.o"
+  "/home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/comparator.cpp" "/home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/CMakeFiles/comparator.dir/comparator.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

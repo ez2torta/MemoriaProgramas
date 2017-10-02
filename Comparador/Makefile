@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization
+CMAKE_SOURCE_DIR = /home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization
+CMAKE_BINARY_DIR = /home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,9 +69,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/CMakeFiles /home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/CMakeFiles /home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -99,41 +99,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named voxel_grid
+# Target rules for targets named comparator
 
 # Build rule for target.
-voxel_grid: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 voxel_grid
-.PHONY : voxel_grid
+comparator: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 comparator
+.PHONY : comparator
 
 # fast build rule for target.
-voxel_grid/fast:
-	$(MAKE) -f CMakeFiles/voxel_grid.dir/build.make CMakeFiles/voxel_grid.dir/build
-.PHONY : voxel_grid/fast
+comparator/fast:
+	$(MAKE) -f CMakeFiles/comparator.dir/build.make CMakeFiles/comparator.dir/build
+.PHONY : comparator/fast
 
-voxel_grid.o: voxel_grid.cpp.o
-.PHONY : voxel_grid.o
+comparator.o: comparator.cpp.o
+.PHONY : comparator.o
 
 # target to build an object file
-voxel_grid.cpp.o:
-	$(MAKE) -f CMakeFiles/voxel_grid.dir/build.make CMakeFiles/voxel_grid.dir/voxel_grid.cpp.o
-.PHONY : voxel_grid.cpp.o
+comparator.cpp.o:
+	$(MAKE) -f CMakeFiles/comparator.dir/build.make CMakeFiles/comparator.dir/comparator.cpp.o
+.PHONY : comparator.cpp.o
 
-voxel_grid.i: voxel_grid.cpp.i
-.PHONY : voxel_grid.i
+comparator.i: comparator.cpp.i
+.PHONY : comparator.i
 
 # target to preprocess a source file
-voxel_grid.cpp.i:
-	$(MAKE) -f CMakeFiles/voxel_grid.dir/build.make CMakeFiles/voxel_grid.dir/voxel_grid.cpp.i
-.PHONY : voxel_grid.cpp.i
+comparator.cpp.i:
+	$(MAKE) -f CMakeFiles/comparator.dir/build.make CMakeFiles/comparator.dir/comparator.cpp.i
+.PHONY : comparator.cpp.i
 
-voxel_grid.s: voxel_grid.cpp.s
-.PHONY : voxel_grid.s
+comparator.s: comparator.cpp.s
+.PHONY : comparator.s
 
 # target to generate assembly for a file
-voxel_grid.cpp.s:
-	$(MAKE) -f CMakeFiles/voxel_grid.dir/build.make CMakeFiles/voxel_grid.dir/voxel_grid.cpp.s
-.PHONY : voxel_grid.cpp.s
+comparator.cpp.s:
+	$(MAKE) -f CMakeFiles/comparator.dir/build.make CMakeFiles/comparator.dir/comparator.cpp.s
+.PHONY : comparator.cpp.s
 
 # Help Target
 help:
@@ -141,12 +141,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... comparator"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... voxel_grid"
-	@echo "... voxel_grid.o"
-	@echo "... voxel_grid.i"
-	@echo "... voxel_grid.s"
+	@echo "... comparator.o"
+	@echo "... comparator.i"
+	@echo "... comparator.s"
 .PHONY : help
 
 

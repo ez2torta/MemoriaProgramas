@@ -1,11 +1,37 @@
 #include <iostream>
+#include <fstream>
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <pcl/filters/voxel_grid.h>
 
-int
-main (int argc, char** argv)
-{
+
+// Falta:
+// 1.- Computar el Centroide
+// 2.- Transformar los puntos (que se muevan en direccián opuesta al centroide para que queden boni) y centrar el coso
+
+// 3.- Pasar las pointclouds a una matriz (con objetos?)
+// 4.- Iterar sobre una matriz respecto a los puntos para calcular posibles diferencias
+
+// 5.- (Opcional) Tener un visualizador dentro del mismo ejecutable
+
+// http://robotica.unileon.es/index.php/PCL/OpenNI_tutorial_2:_Cloud_processing_(basic)
+
+// http://pointclouds.org/documentation/tutorials/matrix_transform.php
+
+float dist_pcl_points( pcl::PointXYZ v1,  pcl::PointXYZ v2){
+  float x1, x2, y2, y2, z1, z2;
+
+  x1 = v1._PointXYZ::data[ 0 ];
+  y1 = v1._PointXYZ::data[ 1 ];
+  z1 = v1._PointXYZ::data[ 2 ];
+  x2 = v2._PointXYZ::data[ 0 ];
+  y2 = v2._PointXYZ::data[ 1 ];
+  z2 = v2._PointXYZ::data[ 2 ];
+
+  return std::sqrt( (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) + (z1-z2)*(z1-z2))
+}
+
+int main (int argc, char** argv){
 
   if (argc < 3) {
       // Tell the user how to run the program
@@ -49,6 +75,27 @@ main (int argc, char** argv)
   pcl::PCDWriter writer;
   writer.write (rawname+" voxelized size "+size+".pcd", *cloud_filtered, 
          Eigen::Vector4f::Zero (), Eigen::Quaternionf::Identity (), false);
+
+  pcl::PointCloud<pcl::PointXYZ>::Ptr vertices( new pcl::PointCloud<pcl::PointXYZ> );
+  pcl::fromPCLPointCloud2( *cloud_filtered, *vertices );
+
+  std::ofstream myfile;
+  // myfile.open ("cloud_filtered vertices.txt");
+  // myfile << *vertices;
+
+  // access each vertex 
+  for( int idx = 0; idx < vertices->size(); idx++ )
+  {
+     pcl::PointXYZ v = vertices->points[ idx ];
+
+     float x = v._PointXYZ::data[ 0 ];
+     float y = v._PointXYZ::data[ 1 ];
+     float z = v._PointXYZ::data[ 2 ];
+     myfile << x << " " << y << " " << z << " \n";
+  }
+
+  myfile.close();
+
 
   return (0);
 }

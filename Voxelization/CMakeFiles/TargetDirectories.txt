@@ -1,1 +1,1 @@
-/home/osboxes/Develop/Memoria/Programas/Voxelization/CMakeFiles/voxel_grid.dir
+/home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/CMakeFiles/voxel_grid.dir

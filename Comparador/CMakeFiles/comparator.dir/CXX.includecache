@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/voxel_grid.cpp
+/home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/comparator.cpp
 iostream
 -
 fstream
