@@ -17,6 +17,33 @@ float dist_pcl_points( pcl::PointXYZ v1,  pcl::PointXYZ v2){
   return std::sqrt( (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) + (z1-z2)*(z1-z2));
 }
 
+float compare ( pcl::PointCloud<pcl::PointXYZ>::Ptr vertices1,  pcl::PointCloud<pcl::PointXYZ>::Ptr vertices2 , float size){
+  int contador = 0; // Habra que cambiarlo puedo que maxint = 32767 
+  int comp = (int) vertices1->size();
+  // access each vertex 
+  for( int id1 = 0; id1 < vertices1->size(); id1++ ){
+    float min = 100;
+     pcl::PointXYZ v1 = vertices1->points[ id1 ];
+     for( int id2 = 0; id2 < vertices2->size(); id2++ ){
+      pcl::PointXYZ v2 = vertices2->points[ id2 ];
+      float dist = dist_pcl_points(v1,v2);
+      if (min >= dist){
+        min = dist;
+      }
+     }
+     // myfile << "Punto mas cercano a  " << v1 << " encontrado a  " << min << " \n";
+     // Aquí va un posible comparador para ver si corresponde o no a un voxel calo
+     if (min <= size){
+      // completion.push_back(true);
+      contador++;
+     }
+     else{
+      // completion.push_back(false);
+     }
+  }
+  return contador;
+}
+
 std::string clear_filename(std::string fullname){
   size_t lastindex = fullname.find_last_of("."); 
   std::string rawname = fullname.substr(0, lastindex); 
@@ -63,19 +90,23 @@ int main (int argc, char** argv) {
   std::ofstream myfile;
   myfile.open ("results.txt");
 
-  // access each vertex 
-  for( int id1 = 0; id1 < vertices1->size(); id1++ ){
-    float min = 100;
-     pcl::PointXYZ v1 = vertices1->points[ id1 ];
-     for( int id2 = 0; id2 < vertices2->size(); id2++ ){
-      pcl::PointXYZ v2 = vertices2->points[ id2 ];
-      float dist = dist_pcl_points(v1,v2);
-      if (min >= dist){
-        min = dist;
-      }
-     }
-     myfile << "Punto mas cercano a  " << v1 << " encontrado a  " << min << " \n";
-  }
+  // std::vector<bool> completion = {};
+
+  float c1 = compare(vertices1, vertices2, size1_to_float);
+  float c2 = compare(vertices2, vertices1, size2_to_float);
+  int tot1 = (int) vertices1->size();
+  int tot2 = (int) vertices2->size();
+  float hit1 = (float)(c1*100/tot1);
+  float hit2 = (float)(c2*100/tot2);
+ 
+  myfile << "Cloud 1 = " << fullname1 << "\n";
+  myfile << "Cloud 2 = " << fullname2 << "\n";
+  // myfile << "Total de Exitos = " << contador << "\n";
+  // myfile << "Total de Errores = " << comp-contador << "\n";
+  myfile << "Porcentaje de éxito 1 = " << hit1 << "% \n";
+  myfile << "Porcentaje de éxito 2 = " << hit2 << "% \n";
+  myfile << "Minimo entre los 2  = " << std::min(hit1,hit2) << "% \n";
+
 
   myfile.close();
 
