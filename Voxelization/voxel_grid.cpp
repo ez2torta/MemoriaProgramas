@@ -20,8 +20,6 @@
 #include <pcl/segmentation/region_3d.h>
 
 // Falta:
-// 1.- Computar el Centroide
-// 2.- Transformar los puntos (que se muevan en direccián opuesta al centroide para que queden boni) y centrar el coso
 
 // 3.- Pasar las pointclouds a una matriz (con objetos?)
 // 4.- Iterar sobre una matriz respecto a los puntos para calcular posibles diferencias
@@ -38,6 +36,13 @@ Eigen::Vector4f compute_centroid(pcl::PointCloud<pcl::PointXYZ>::Ptr v1){
   // cout << "centroid:" << centroid[0] << " " <<  centroid[1] << " " <<   centroid[2] << " " <<   centroid[3] << " \n";
   return centroid;
 }  
+
+void ToString(std::string& out, float value)
+{
+    std::ostringstream ss;
+    ss << value;
+    out = ss.str();
+}
 
 
 float dist_pcl_points( pcl::PointXYZ v1,  pcl::PointXYZ v2){
@@ -93,10 +98,12 @@ int main (int argc, char** argv){
   float centroidY = centroid[1];
   float centroidZ = centroid[2];
 
+  float scaling = 0.5;
   // Hasta aqui estan los valores de la matriz de traslación
   // Definimos la Transformacion
   Eigen::Affine3f transform = Eigen::Affine3f::Identity();
-  transform.translation() << -centroidX, -centroidY, -centroidZ;
+  transform.translation() << -centroidX*scaling, -centroidY*scaling, -centroidZ*scaling;
+  transform.scale(scaling);
   // Definicion de nube nueva
   pcl::PointCloud<pcl::PointXYZ>::Ptr transformed_cloud (new pcl::PointCloud<pcl::PointXYZ> ());
   // Aplicar la Transformación
@@ -113,13 +120,17 @@ int main (int argc, char** argv){
   sor.setLeafSize (size_to_float, size_to_float, size_to_float);
   sor.filter (*cloud_filtered);
 
+
+  std::string scaling_str;
+  ToString(scaling_str, scaling);
+
   std::cerr << "PointCloud after filtering: " << cloud_filtered->width * cloud_filtered->height 
        << " data points (" << pcl::getFieldsList (*cloud_filtered) << ").\n";
 
 
   // Escribir el archivo PCD
   pcl::PCDWriter writer;
-  writer.write (rawname+" voxelized size "+size+".pcd", *cloud_filtered, 
+  writer.write (rawname+" voxelsize "+size+" scale "+scaling_str+".pcd", *cloud_filtered, 
          Eigen::Vector4f::Zero (), Eigen::Quaternionf::Identity (), false);
 
   return (0);
