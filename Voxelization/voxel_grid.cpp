@@ -104,6 +104,10 @@ int main (int argc, char** argv){
 
   // en pmin y pmax estan los maximos y minimos de los ejes.. ahora hay quwe sumarleos restarlos o ver que onda para aplicar la escala cala.
 
+// Tomar 2 tipos de escala
+  // 1.- Meter todo el objeto en un cubo de 1x1x1 (escalarlo sin respetar aspect ratio)
+  // 2.- Meter el objeto con uno de sus ejes dentro de un espacio de 1, el resto adecuarse a un aspect ratio determinado.
+
   // Encontrar Escalas y Aplicar Escala
   Eigen::Vector3f escala;
   float sx = 0.5; // factor X de escala
