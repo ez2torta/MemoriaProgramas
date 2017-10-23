@@ -15,13 +15,7 @@ pcl/io/pcd_io.h
 -
 pcl/point_types.h
 -
-pcl/filters/voxel_grid.h
--
 pcl/ModelCoefficients.h
--
-pcl/io/pcd_io.h
--
-pcl/point_types.h
 -
 pcl/sample_consensus/method_types.h
 -

@@ -2,10 +2,7 @@
 #include <fstream>
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
-#include <pcl/filters/voxel_grid.h>
 #include <pcl/ModelCoefficients.h>
-#include <pcl/io/pcd_io.h>
-#include <pcl/point_types.h>
 #include <pcl/sample_consensus/method_types.h>
 #include <pcl/sample_consensus/model_types.h>
 #include <pcl/segmentation/sac_segmentation.h>
@@ -93,17 +90,39 @@ int main (int argc, char** argv){
   pcl::PointCloud<pcl::PointXYZ>::Ptr vertices( new pcl::PointCloud<pcl::PointXYZ> );
   pcl::fromPCLPointCloud2( *cloud, *vertices );
 
+
   Eigen::Vector4f centroid =  compute_centroid(vertices);
   float centroidX = centroid[0];
   float centroidY = centroid[1];
   float centroidZ = centroid[2];
 
-  float scaling = 0.5;
+  pcl::PointXYZ p_min;
+  pcl::PointXYZ p_max;
+  pcl::getMinMax3D(*vertices, p_min, p_max);
+
+  std::cout << "Minimos: " << p_min << "\nMaximos: " << p_max << "\n";
+
+  // en pmin y pmax estan los maximos y minimos de los ejes.. ahora hay quwe sumarleos restarlos o ver que onda para aplicar la escala cala.
+
+  // Encontrar Escalas y Aplicar Escala
+  Eigen::Vector3f escala;
+  float sx = 0.5; // factor X de escala
+  float sy = 0.5; // factor Y de escala
+  float sz = 0.5; // factor Z de escala
+  escala[0]= sx;
+  escala[1]= sy;
+  escala[2]= sz;
+  std::string str_sx, str_sy, str_sz;
+  ToString(str_sx, sx);
+  ToString(str_sy, sy);
+  ToString(str_sz, sz);
+
   // Hasta aqui estan los valores de la matriz de traslación
   // Definimos la Transformacion
   Eigen::Affine3f transform = Eigen::Affine3f::Identity();
-  transform.translation() << -centroidX*scaling, -centroidY*scaling, -centroidZ*scaling;
-  transform.scale(scaling);
+  transform.translation() << -centroidX, -centroidY, -centroidZ;
+  transform.scale(escala);
+
   // Definicion de nube nueva
   pcl::PointCloud<pcl::PointXYZ>::Ptr transformed_cloud (new pcl::PointCloud<pcl::PointXYZ> ());
   // Aplicar la Transformación
@@ -120,17 +139,15 @@ int main (int argc, char** argv){
   sor.setLeafSize (size_to_float, size_to_float, size_to_float);
   sor.filter (*cloud_filtered);
 
-
-  std::string scaling_str;
-  ToString(scaling_str, scaling);
-
+   
   std::cerr << "PointCloud after filtering: " << cloud_filtered->width * cloud_filtered->height 
        << " data points (" << pcl::getFieldsList (*cloud_filtered) << ").\n";
 
+  std::string escala_str = "[ "+str_sx+","+str_sy+","+str_sz +" ]" ;
 
   // Escribir el archivo PCD
   pcl::PCDWriter writer;
-  writer.write (rawname+" voxelsize "+size+" scale "+scaling_str+".pcd", *cloud_filtered, 
+  writer.write (rawname+" voxelsize "+size+" scale "+escala_str+".pcd", *cloud_filtered, 
          Eigen::Vector4f::Zero (), Eigen::Quaternionf::Identity (), false);
 
   return (0);
