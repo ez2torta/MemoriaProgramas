@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <pcl/ModelCoefficients.h>
@@ -57,14 +58,25 @@ float dist_pcl_points( pcl::PointXYZ v1,  pcl::PointXYZ v2){
 
 int main (int argc, char** argv){
 
-  if (argc < 3) {
+  // constantes de ejecución
+  const int scale_method_ratio = 1;
+  const int scale_method_all_axis = 2;
+
+
+  if (argc < 4) {
       // Tell the user how to run the program
-      std::cerr << "Usage: " << argv[0] << " <filename.pcd> <size>" << std::endl;
+      std::cerr << "============ HELP ==============" << std::endl;
+      std::cerr << "Usage: " << argv[0] << " <filename.pcd> <size> <scale_method>" << std::endl;
+      std::cerr << "<size> =  size in cm" << std::endl;
+      std::cerr << "<scale_method> = 1 Keep Aspect Ratio (using Z Scale)" << std::endl;
+      std::cerr << "<scale_method> = 2 All_Axis (does not keep axis ratio)" << std::endl;
       /* "Usage messages" are a conventional way of telling the user
        * how to run a program if they enter the command incorrectly.
        */
       return 1;
   }
+
+
 
   pcl::PCLPointCloud2::Ptr cloud (new pcl::PCLPointCloud2 ());
   // pcl::PCLPointCloud2::Ptr cloud_filtered (new pcl::PCLPointCloud2 ());
@@ -74,10 +86,25 @@ int main (int argc, char** argv){
   // Replace the path below with the path where you saved your file
   std::string fullname = argv[1];
 
+
   size_t lastindex = fullname.find_last_of("."); 
   std::string rawname = fullname.substr(0, lastindex); 
 
   std::string size = argv[2];
+
+  //conversión de string a int (??)
+  std::istringstream ss(argv[3]);
+
+  int scale_method;
+
+  if(!(ss >> scale_method)){
+    std::cerr << "Número Inválido " << argv[3] << std::endl;
+  }
+  else{
+
+  }
+
+
 
   float size_to_float = std::atof(size.c_str());
 
@@ -100,7 +127,33 @@ int main (int argc, char** argv){
   pcl::PointXYZ p_max;
   pcl::getMinMax3D(*vertices, p_min, p_max);
 
-  std::cout << "Minimos: " << p_min << "\nMaximos: " << p_max << "\n";
+  float sx = 1; // factor X de escala
+  float sy = 1; // factor Y de escala
+  float sz = 1; // factor Z de escala
+
+
+  // Suponemos un cubo de tamaño 10 para las comparaciones
+
+  if (scale_method == scale_method_ratio){
+    // Escalamos los objetos respecto a la escala del eje Z
+    // suponiendo que el eje Z es el eje [2]
+    float dist_max = p_max._PointXYZ::data[2]-p_min._PointXYZ::data[2];
+    float scale = 10/dist_max;
+    sx = scale;
+    sy = scale;
+    sz = scale;
+  }
+  else if (scale_method == scale_method_all_axis){
+    // acá a cada eje le asignamos una escala distinta
+    float dist_max_x = p_max._PointXYZ::data[0]-p_min._PointXYZ::data[0];
+    float dist_max_y = p_max._PointXYZ::data[1]-p_min._PointXYZ::data[1];
+    float dist_max_z = p_max._PointXYZ::data[2]-p_min._PointXYZ::data[2];
+    sx = 10/dist_max_x;
+    sy = 10/dist_max_y;
+    sz = 10/dist_max_z;
+
+  }
+  // std::cout << "Minimos: " << p_min << "\nMaximos: " << p_max << "\n";
 
   // en pmin y pmax estan los maximos y minimos de los ejes.. ahora hay quwe sumarleos restarlos o ver que onda para aplicar la escala cala.
 
@@ -109,10 +162,10 @@ int main (int argc, char** argv){
   // 2.- Meter el objeto con uno de sus ejes dentro de un espacio de 1, el resto adecuarse a un aspect ratio determinado.
 
   // Encontrar Escalas y Aplicar Escala
+
+
   Eigen::Vector3f escala;
-  float sx = 0.5; // factor X de escala
-  float sy = 0.5; // factor Y de escala
-  float sz = 0.5; // factor Z de escala
+ 
   escala[0]= sx;
   escala[1]= sy;
   escala[2]= sz;
@@ -124,7 +177,7 @@ int main (int argc, char** argv){
   // Hasta aqui estan los valores de la matriz de traslación
   // Definimos la Transformacion
   Eigen::Affine3f transform = Eigen::Affine3f::Identity();
-  transform.translation() << -centroidX, -centroidY, -centroidZ;
+  transform.translation() << -centroidX*sx, -centroidY*sy, -centroidZ*sz;
   transform.scale(escala);
 
   // Definicion de nube nueva
