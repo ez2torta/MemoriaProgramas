@@ -1,5 +1,5 @@
-Cloud 1 = table_scene_lms400 voxelized size 0.1.pcd
-Cloud 2 = table_scene_lms400 voxelized size 0.2.pcd
-Porcentaje de éxito 1 = 92.3688% 
-Porcentaje de éxito 2 = 100% 
-Minimo entre los 2  = 92.3688% 
+Cloud 1 = Hormiga Normal voxelsize 0.1 scale 1.pcd
+Cloud 2 = Hormiga Triangulo voxelsize 0.1 scale 1.pcd
+Porcentaje de éxito 1 = 97.8873% 
+Porcentaje de éxito 2 = 97.8873% 
+Minimo entre los 2  = 97.8873% 

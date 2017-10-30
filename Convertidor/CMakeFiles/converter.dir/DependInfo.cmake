@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/osboxes/Develop/Memoria/Convertidor/converter.cpp" "/home/osboxes/Develop/Memoria/Convertidor/CMakeFiles/converter.dir/converter.cpp.o"
+  "/home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor/converter.cpp" "/home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor/CMakeFiles/converter.dir/converter.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

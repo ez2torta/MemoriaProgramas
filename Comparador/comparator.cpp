@@ -52,9 +52,10 @@ std::string clear_filename(std::string fullname){
 
 int main (int argc, char** argv) {
 
-  if (argc < 5) {
+  if (argc < 4) {
       // Tell the user how to run the program
-      std::cerr << "Usage: " << argv[0] << " <filename.pcd> <size1> <filename2.pcd> <size2>" << std::endl;
+      // std::cerr << "Usage: " << argv[0] << " <filename.pcd> <size1> <filename2.pcd> <size2>" << std::endl;
+      std::cerr << "Usage: " << argv[0] << " <filename.pcd> <filename2.pcd> <size>" << std::endl;
       /* "Usage messages" are a conventional way of telling the user
        * how to run a program if they enter the command incorrectly.
        */
@@ -68,15 +69,14 @@ int main (int argc, char** argv) {
   pcl::PCDReader reader;
   // Replace the path below with the path where you saved your file
   std::string fullname1 = argv[1];
-  std::string fullname2 = argv[3];
+  std::string fullname2 = argv[2];
   // std::string rawname1 = clear_filename(argv[1]);
   // std::string rawname2 = clear_filename(argv[3]);
   
-  std::string size1 = argv[2];
-  std::string size2 = argv[4];
+  std::string size1 = argv[3];
 
-  float size1_to_float = std::atof(size1.c_str());
-  float size2_to_float = std::atof(size2.c_str());
+  float size_to_float = std::atof(size1.c_str());
+  // float size2_to_float = std::atof(size2.c_str());
 
   reader.read (fullname1, *cloud1); // Remember to download the file first!
   reader.read (fullname2, *cloud2); // Remember to download the file first!
@@ -88,12 +88,14 @@ int main (int argc, char** argv) {
   pcl::fromPCLPointCloud2( *cloud2, *vertices2 );
 
   std::ofstream myfile;
-  myfile.open ("results.txt");
+
+  std::string fname = "results size "+ size1 +".txt";
+  myfile.open (fname.c_str());
 
   // std::vector<bool> completion = {};
 
-  float c1 = compare(vertices1, vertices2, size1_to_float);
-  float c2 = compare(vertices2, vertices1, size2_to_float);
+  float c1 = compare(vertices1, vertices2, size_to_float);
+  float c2 = compare(vertices2, vertices1, size_to_float);
   int tot1 = (int) vertices1->size();
   int tot2 = (int) vertices2->size();
   float hit1 = (float)(c1*100/tot1);

@@ -1,1 +1,1 @@
-/home/osboxes/Develop/Memoria/Convertidor/CMakeFiles/converter.dir
+/home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor/CMakeFiles/converter.dir

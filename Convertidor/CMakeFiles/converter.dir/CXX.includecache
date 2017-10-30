@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/osboxes/Develop/Memoria/Convertidor/converter.cpp
+/home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor/converter.cpp
 vector
 -
 pcl/console/parse.h

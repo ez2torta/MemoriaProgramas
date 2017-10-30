@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/osboxes/Develop/Memoria/Convertidor
+CMAKE_SOURCE_DIR = /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/osboxes/Develop/Memoria/Convertidor
+CMAKE_BINARY_DIR = /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor
 
 # Include any dependencies generated for this target.
 include CMakeFiles/converter.dir/depend.make
@@ -51,17 +51,17 @@ include CMakeFiles/converter.dir/flags.make
 
 CMakeFiles/converter.dir/converter.cpp.o: CMakeFiles/converter.dir/flags.make
 CMakeFiles/converter.dir/converter.cpp.o: converter.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/osboxes/Develop/Memoria/Convertidor/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/converter.dir/converter.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/converter.dir/converter.cpp.o -c /home/osboxes/Develop/Memoria/Convertidor/converter.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/converter.dir/converter.cpp.o -c /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor/converter.cpp
 
 CMakeFiles/converter.dir/converter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/converter.dir/converter.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/osboxes/Develop/Memoria/Convertidor/converter.cpp > CMakeFiles/converter.dir/converter.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor/converter.cpp > CMakeFiles/converter.dir/converter.cpp.i
 
 CMakeFiles/converter.dir/converter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/converter.dir/converter.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/osboxes/Develop/Memoria/Convertidor/converter.cpp -o CMakeFiles/converter.dir/converter.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor/converter.cpp -o CMakeFiles/converter.dir/converter.cpp.s
 
 CMakeFiles/converter.dir/converter.cpp.o.requires:
 .PHONY : CMakeFiles/converter.dir/converter.cpp.o.requires
@@ -200,6 +200,6 @@ CMakeFiles/converter.dir/clean:
 .PHONY : CMakeFiles/converter.dir/clean
 
 CMakeFiles/converter.dir/depend:
-	cd /home/osboxes/Develop/Memoria/Convertidor && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/osboxes/Develop/Memoria/Convertidor /home/osboxes/Develop/Memoria/Convertidor /home/osboxes/Develop/Memoria/Convertidor /home/osboxes/Develop/Memoria/Convertidor /home/osboxes/Develop/Memoria/Convertidor/CMakeFiles/converter.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor/CMakeFiles/converter.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/converter.dir/depend
 

@@ -47,10 +47,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/osboxes/Develop/Memoria/Convertidor
+CMAKE_SOURCE_DIR = /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/osboxes/Develop/Memoria/Convertidor
+CMAKE_BINARY_DIR = /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor
 
 #=============================================================================
 # Target rules for target CMakeFiles/converter.dir
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/osboxes/Develop/Memoria/Convertidor
 CMakeFiles/converter.dir/all:
 	$(MAKE) -f CMakeFiles/converter.dir/build.make CMakeFiles/converter.dir/depend
 	$(MAKE) -f CMakeFiles/converter.dir/build.make CMakeFiles/converter.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/osboxes/Develop/Memoria/Convertidor/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor/CMakeFiles  1
 	@echo "Built target converter"
 .PHONY : CMakeFiles/converter.dir/all
 
@@ -69,9 +69,9 @@ all: CMakeFiles/converter.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/converter.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/osboxes/Develop/Memoria/Convertidor/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/converter.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/osboxes/Develop/Memoria/Convertidor/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/osboxes/Develop/Memoria/MemoriaProgramas/Convertidor/CMakeFiles 0
 .PHONY : CMakeFiles/converter.dir/rule
 
 # Convenience name for target.
