@@ -1,0 +1,4 @@
+Scanning dependencies of target comparator
+[100%] Building CXX object CMakeFiles/comparator.dir/comparator.cpp.o
+Linking CXX executable comparator
+[100%] Built target comparator

@@ -53,15 +53,15 @@ CMakeFiles/comparator.dir/comparator.cpp.o: CMakeFiles/comparator.dir/flags.make
 CMakeFiles/comparator.dir/comparator.cpp.o: comparator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/comparator.dir/comparator.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/comparator.dir/comparator.cpp.o -c /home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/comparator.cpp
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/comparator.dir/comparator.cpp.o -c /home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/comparator.cpp
 
 CMakeFiles/comparator.dir/comparator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/comparator.dir/comparator.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/comparator.cpp > CMakeFiles/comparator.dir/comparator.cpp.i
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/comparator.cpp > CMakeFiles/comparator.dir/comparator.cpp.i
 
 CMakeFiles/comparator.dir/comparator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/comparator.dir/comparator.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/comparator.cpp -o CMakeFiles/comparator.dir/comparator.cpp.s
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/osboxes/Develop/Memoria/MemoriaProgramas/Comparador/comparator.cpp -o CMakeFiles/comparator.dir/comparator.cpp.s
 
 CMakeFiles/comparator.dir/comparator.cpp.o.requires:
 .PHONY : CMakeFiles/comparator.dir/comparator.cpp.o.requires

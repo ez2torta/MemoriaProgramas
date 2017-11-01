@@ -31,14 +31,9 @@ float compare ( pcl::PointCloud<pcl::PointXYZ>::Ptr vertices1,  pcl::PointCloud<
         min = dist;
       }
      }
-     // myfile << "Punto mas cercano a  " << v1 << " encontrado a  " << min << " \n";
-     // Aquí va un posible comparador para ver si corresponde o no a un voxel calo
      if (min <= size){
-      // completion.push_back(true);
+
       contador++;
-     }
-     else{
-      // completion.push_back(false);
      }
   }
   return contador;

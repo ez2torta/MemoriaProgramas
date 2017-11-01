@@ -1,0 +1,4 @@
+La estructura de los experimentos sintéticos es la siguiente:
+
+
+Iterar sobre 4 modelos, considerando cierto tamaño definido de voxel, para luego iterar sobre las deformaciones en 4 niveles

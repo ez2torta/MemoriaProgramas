@@ -1,0 +1,10 @@
+Experimento de Perturbación
+
+Tomar todos los puntos y modificarlos+-
+
+1%
+5%
+10%
+20%
+
+Luego comparar respecto al objeto original.

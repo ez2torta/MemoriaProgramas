@@ -53,15 +53,15 @@ CMakeFiles/voxel_grid.dir/voxel_grid.cpp.o: CMakeFiles/voxel_grid.dir/flags.make
 CMakeFiles/voxel_grid.dir/voxel_grid.cpp.o: voxel_grid.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/voxel_grid.dir/voxel_grid.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/voxel_grid.dir/voxel_grid.cpp.o -c /home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/voxel_grid.cpp
+	/usr/bin/g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/voxel_grid.dir/voxel_grid.cpp.o -c /home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/voxel_grid.cpp
 
 CMakeFiles/voxel_grid.dir/voxel_grid.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/voxel_grid.dir/voxel_grid.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/voxel_grid.cpp > CMakeFiles/voxel_grid.dir/voxel_grid.cpp.i
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/voxel_grid.cpp > CMakeFiles/voxel_grid.dir/voxel_grid.cpp.i
 
 CMakeFiles/voxel_grid.dir/voxel_grid.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/voxel_grid.dir/voxel_grid.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/voxel_grid.cpp -o CMakeFiles/voxel_grid.dir/voxel_grid.cpp.s
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/osboxes/Develop/Memoria/MemoriaProgramas/Voxelization/voxel_grid.cpp -o CMakeFiles/voxel_grid.dir/voxel_grid.cpp.s
 
 CMakeFiles/voxel_grid.dir/voxel_grid.cpp.o.requires:
 .PHONY : CMakeFiles/voxel_grid.dir/voxel_grid.cpp.o.requires

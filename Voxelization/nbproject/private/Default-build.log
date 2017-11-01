@@ -1,0 +1,4 @@
+Scanning dependencies of target voxel_grid
+[100%] Building CXX object CMakeFiles/voxel_grid.dir/voxel_grid.cpp.o
+Linking CXX executable voxel_grid
+[100%] Built target voxel_grid

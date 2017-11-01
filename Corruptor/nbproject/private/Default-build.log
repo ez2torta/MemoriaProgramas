@@ -1,0 +1,4 @@
+Scanning dependencies of target corruptor
+[100%] Building CXX object CMakeFiles/corruptor.dir/corruptor.cpp.o
+Linking CXX executable corruptor
+[100%] Built target corruptor

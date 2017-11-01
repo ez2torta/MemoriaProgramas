@@ -1,0 +1,5 @@
+Cloud 1 = m001 voxelsize 0.1 scale [ 0.153374,0.153374,0.153374 ].pcd
+Cloud 2 = prueba1 1.1 voxelsize 0.1 scale [ 0.133611,0.133611,0.133611 ].pcd
+Porcentaje de éxito 1 = 85.441% 
+Porcentaje de éxito 2 = 27.9779% 
+Minimo entre los 2  = 27.9779% 

@@ -17,16 +17,6 @@
 #include <pcl/common/transforms.h>
 #include <pcl/segmentation/region_3d.h>
 
-// Falta:
-
-// 3.- Pasar las pointclouds a una matriz (con objetos?)
-// 4.- Iterar sobre una matriz respecto a los puntos para calcular posibles diferencias
-
-// 5.- (Opcional) Tener un visualizador dentro del mismo ejecutable
-
-// http://robotica.unileon.es/index.php/PCL/OpenNI_tutorial_2:_Cloud_processing_(basic)
-
-// http://pointclouds.org/documentation/tutorials/matrix_transform.php
 
 Eigen::Vector4f compute_centroid(pcl::PointCloud<pcl::PointXYZ>::Ptr v1){
   Eigen::Vector4f centroid;

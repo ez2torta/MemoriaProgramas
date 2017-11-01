@@ -1,0 +1,1 @@
+/home/osboxes/Develop/Memoria/MemoriaProgramas/Corruptor/CMakeFiles/corruptor.dir
