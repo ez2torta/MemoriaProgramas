@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/osboxes/Develop/Memoria/MemoriaProgramas/Corruptor/corruptor.cpp
+/home/osboxes/Develop/Memoria/MemoriaProgramas/Corruptor/aux_functions.h
 iostream
 -
 fstream
@@ -23,6 +23,10 @@ pcl/common/common.h
 -
 pcl/common/transforms.h
 -
+
+/home/osboxes/Develop/Memoria/MemoriaProgramas/Corruptor/corruptor.cpp
+aux_functions.h
+/home/osboxes/Develop/Memoria/MemoriaProgramas/Corruptor/aux_functions.h
 
 /usr/include/eigen3/Eigen/Cholesky
 Core
