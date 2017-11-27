@@ -30,15 +30,22 @@ int main (int argc, char** argv) {
     pcl::PCLPointCloud2::Ptr pcl_array[4];
     pcl_array[0] = centered;
     
-    
+    int arr_size = 5;
     // Arreglo de porcentajes de Corrupcion
-    float array[3] = {1.00 , 1.05 , 1.1 };
+    float array[5] = {1.00 , 1.01, 1.02, 1.03, 1.05 };
 
-    std::cerr << "Porcentajes de Corrupción : " << array[0] << " " <<  array [1] << " " << array[2] << std::endl;
+    std::cerr << "Porcentajes de Corrupción : ";
+    
+    for (int i = 0; i < arr_size; i++){
+        std::cerr << array[i] << " "; 
+    }
+
+
+    std::cerr << std::endl;
 
     
     // Iterar la corrupción y almacenarlo a pcl_array
-    for (int i = 1; i <= 3; i++) {
+    for (int i = 1; i <= arr_size; i++) {
         pcl::PCLPointCloud2::Ptr transformed_cloud(new pcl::PCLPointCloud2());
         transformed_cloud = transform(cloud,false);
         pcl::PointCloud<pcl::PointXYZ>::Ptr vertices(new pcl::PointCloud<pcl::PointXYZ>);
@@ -60,19 +67,24 @@ int main (int argc, char** argv) {
 
     }
     std::cerr << "Modelos Corruptos Procesados" << std::endl;
-    
+    std::cerr << "Resultados Finales ";
     // Aplicar Voxelización sobre todo pcl_array
-    for (int i = 0; i < 4; i++){
+    pcl_array[0] = voxel_cloud(pcl_array[0], size_to_float);
+    for (int i = 1; i <= arr_size; i++){
        pcl_array[i] = voxel_cloud(pcl_array[i], size_to_float);
+       float c1 = compare_clouds(pcl_array[0], pcl_array[i], size_to_float);
+       std::cerr << c1 << " " ;
     }
-    std::cerr << "Modelos Voxelizados" << std::endl;
+    std::cerr << std::endl;
     
-    // Comparar pcl_array[0] con [1] [2] y [3]
-    float c1 = compare_clouds(pcl_array[0], pcl_array[1], size_to_float);
-    float c2 = compare_clouds(pcl_array[0], pcl_array[2], size_to_float);
-    float c3 = compare_clouds(pcl_array[0], pcl_array[3], size_to_float);
+
+    // // Comparar pcl_array[0] con [1] [2] y [3]
+    // float c1 = compare_clouds(pcl_array[0], pcl_array[1], size_to_float);
+    // float c2 = compare_clouds(pcl_array[0], pcl_array[2], size_to_float);
+    // float c3 = compare_clouds(pcl_array[0], pcl_array[3], size_to_float);
     
-    std::cerr << "Resultados Finales " << c1 << " " << c2  << " "<< c3 << std::endl;
+
+
     
     return (0);
 }
