@@ -54,6 +54,23 @@ int main (int argc, char* argv[]){
   corrupt2(cloud_out, 1.0);
   std::cout << "Corrupción Completa" << std::endl;
   
+  
+  std::string arg2(argv[2]);
+  std::string arg3(argv[3]);
+  
+  std::string size(argv[4]); 
+  float size_to_f = std::atof(size.c_str());
+  
+
+  if (arg3 == "-i" || arg3 == "--ico"){
+    // Voxelizar el source y el corrupto
+    std::cout << "Aplicando ICP " << std::endl;
+    // cloud out => source
+    // cloud in => target
+    // queremos que el cloud_out se transforme en cloud_in
+    cloud_out = vanilla_icp(cloud_out, cloud_in );
+  }
+
   // Trasladar Centroides al origen
   pcl::PCLPointCloud2::Ptr transformed_cloud1(new pcl::PCLPointCloud2());
   pcl::PCLPointCloud2::Ptr transformed_cloud2(new pcl::PCLPointCloud2());
@@ -63,11 +80,6 @@ int main (int argc, char* argv[]){
   transformed_cloud1 = traslate_centroid(transformed_cloud1);
   transformed_cloud2 = traslate_centroid(transformed_cloud2);
 
-  
-  std::string size(argv[3]); 
-  float size_to_f = std::atof(size.c_str());
-  std::string arg2(argv[2]);
-
   if (arg2 == "-v" || arg2 == "--voxel"){
     // Voxelizar el source y el corrupto
     std::cout << "Voxelizando con tamaño " << size << std::endl;
@@ -75,12 +87,10 @@ int main (int argc, char* argv[]){
     transformed_cloud2 = voxel_cloud(transformed_cloud2, size_to_f);
   }
   else{
-    // Nada jaja
-    
+    // Nada por ahora jaja
   }
 
   // Comparacion de Nube de puntos
-
   std::cout << compare_clouds(transformed_cloud1, transformed_cloud2, size_to_f) << std::endl;
 
   // std::cout << contador << std::endl;

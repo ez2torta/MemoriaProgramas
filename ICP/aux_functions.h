@@ -291,5 +291,25 @@ void corrupt2( pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, float error) {
     }
 }
 
+pcl::PointCloud<pcl::PointXYZ>::Ptr vanilla_icp(pcl::PointCloud<pcl::PointXYZ>::Ptr sourceCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr targetCloud){
+
+    pcl::PointCloud<pcl::PointXYZ>::Ptr finalCloud(new pcl::PointCloud<pcl::PointXYZ>);
+    // ICP object.
+    pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ> registration;
+    registration.setInputSource(sourceCloud);
+    registration.setInputTarget(targetCloud);
+
+    registration.align(*finalCloud);
+    if (registration.hasConverged())
+    {
+        std::cout << "ICP converged." << std::endl
+                  << "The score is " << registration.getFitnessScore() << std::endl;
+        std::cout << "Transformation matrix:" << std::endl;
+        std::cout << registration.getFinalTransformation() << std::endl;
+    }
+    else std::cout << "ICP did not converge." << std::endl;
+
+    return finalCloud;
+}
 
 #endif
