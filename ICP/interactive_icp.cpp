@@ -1,0 +1,89 @@
+#include <iostream>
+#include <string>
+
+#include <pcl/io/obj_io.h>
+#include <pcl/io/ply_io.h>
+#include <pcl/point_types.h>
+#include <pcl/registration/icp.h>
+#include <pcl/visualization/pcl_visualizer.h>
+#include <pcl/console/time.h>   // TicToc
+
+#include "aux_functions.h"
+
+typedef pcl::PointXYZ PointT;
+typedef pcl::PointCloud<PointT> PointCloudT;
+
+bool has_suffix(const std::string &str, const std::string &suffix)
+{
+    return str.size() >= suffix.size() &&
+           str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
+}
+
+
+int main (int argc, char* argv[]){
+  // The point clouds we will be using
+  PointCloudT::Ptr cloud_in (new PointCloudT);  // Original point cloud
+  PointCloudT::Ptr cloud_out (new PointCloudT);  // Transformed point cloud
+  PointCloudT::Ptr cloud_icp (new PointCloudT);  // ICP output point cloud
+
+// Mejor Random
+  struct timeval time; 
+  gettimeofday(&time,NULL);
+  srand((time.tv_sec * 1000) + (time.tv_usec / 1000));
+  // End Mejor Random
+
+  int iterations = 1;  // Default number of ICP iterations
+
+// Leer modelos calos
+  if(has_suffix(argv[1],".obj")){
+    pcl::io::loadOBJFile(argv[1], *cloud_in);
+  }
+  else if(has_suffix(argv[1],".ply")){
+    pcl::io::loadPLYFile (argv[1], *cloud_in);
+  }
+  else{
+    PCL_ERROR ("Error loading cloud %s.\n", argv[1]);
+    return (-1);  
+  }
+
+  std::cout << cloud_in->size () << " points " <<  std::endl;
+
+  *cloud_out = *cloud_in;
+
+  // Corrompe boludo
+  corrupt2(cloud_out, 1.0);
+  std::cout << "Corrupción Completa" << std::endl;
+  
+  // Trasladar Centroides al origen
+  pcl::PCLPointCloud2::Ptr transformed_cloud1(new pcl::PCLPointCloud2());
+  pcl::PCLPointCloud2::Ptr transformed_cloud2(new pcl::PCLPointCloud2());
+  pcl::toPCLPointCloud2(*cloud_in, *transformed_cloud1);
+  pcl::toPCLPointCloud2(*cloud_out, *transformed_cloud2);
+  
+  transformed_cloud1 = traslate_centroid(transformed_cloud1);
+  transformed_cloud2 = traslate_centroid(transformed_cloud2);
+
+  
+  std::string size(argv[3]); 
+  float size_to_f = std::atof(size.c_str());
+  std::string arg2(argv[2]);
+
+  if (arg2 == "-v" || arg2 == "--voxel"){
+    // Voxelizar el source y el corrupto
+    std::cout << "Voxelizando con tamaño " << size << std::endl;
+    transformed_cloud1 = voxel_cloud(transformed_cloud1, size_to_f);
+    transformed_cloud2 = voxel_cloud(transformed_cloud2, size_to_f);
+  }
+  else{
+    // Nada jaja
+    
+  }
+
+  // Comparacion de Nube de puntos
+
+  std::cout << compare_clouds(transformed_cloud1, transformed_cloud2, size_to_f) << std::endl;
+
+  // std::cout << contador << std::endl;
+  
+  return (0);
+}
