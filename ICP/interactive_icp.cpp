@@ -50,35 +50,48 @@ int main (int argc, char* argv[]){
 
   *cloud_out = *cloud_in;
 
-  // Corrompe boludo
-  corrupt2(cloud_out, 1.0);
+  // Deformar la forma
+  float error = 0.02f;
+  corrupt2(cloud_out, error);
   std::cout << "Corrupción Completa" << std::endl;
   
   
   std::string arg2(argv[2]);
   std::string arg3(argv[3]);
-  
   std::string size(argv[4]); 
   float size_to_f = std::atof(size.c_str());
   
 
-  if (arg3 == "-i" || arg3 == "--ico"){
+  // Parametros de Distancias
+  pcl::PointXYZ p_min;
+  pcl::PointXYZ p_max;
+  pcl::getMinMax3D(*cloud_in, p_min, p_max);
+
+  float dist_max_x = p_max._PointXYZ::data[0] - p_min._PointXYZ::data[0];
+  float dist_max_y = p_max._PointXYZ::data[1] - p_min._PointXYZ::data[1];
+  float dist_max_z = p_max._PointXYZ::data[2] - p_min._PointXYZ::data[2];
+
+  std::cout << "Distancias Máximas: " << dist_max_x << " " << dist_max_y << " " << dist_max_z << std::endl;
+
+
+  if (arg3 == "-i" || arg3 == "--icp"){
     // Voxelizar el source y el corrupto
     std::cout << "Aplicando ICP " << std::endl;
     // cloud out => source
     // cloud in => target
     // queremos que el cloud_out se transforme en cloud_in
-    cloud_out = vanilla_icp(cloud_out, cloud_in );
+    cloud_out = vanilla_icp(cloud_out, cloud_in);
   }
 
-  // Trasladar Centroides al origen
+
   pcl::PCLPointCloud2::Ptr transformed_cloud1(new pcl::PCLPointCloud2());
   pcl::PCLPointCloud2::Ptr transformed_cloud2(new pcl::PCLPointCloud2());
   pcl::toPCLPointCloud2(*cloud_in, *transformed_cloud1);
   pcl::toPCLPointCloud2(*cloud_out, *transformed_cloud2);
-  
-  transformed_cloud1 = traslate_centroid(transformed_cloud1);
-  transformed_cloud2 = traslate_centroid(transformed_cloud2);
+
+  // Trasladar Centroides al origen  
+  // transformed_cloud1 = traslate_centroid(transformed_cloud1);
+  // transformed_cloud2 = traslate_centroid(transformed_cloud2);
 
   if (arg2 == "-v" || arg2 == "--voxel"){
     // Voxelizar el source y el corrupto

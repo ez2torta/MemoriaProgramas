@@ -283,10 +283,9 @@ void corrupt2( pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, float error) {
     // access each vertex without assigning anything
     for (int i = 0; i < cloud->size(); i++) {
         if(0 == (rand() % 2)) {
-            float error_random = RandomFloat(-error, error);
-            cloud->points[i]._PointXYZ::data[ 0 ] = (float) cloud->points[i]._PointXYZ::data[ 0 ] + error_random;
-            cloud->points[i]._PointXYZ::data[ 1 ] = (float) cloud->points[i]._PointXYZ::data[ 1 ] + error_random;
-            cloud->points[i]._PointXYZ::data[ 2 ] = (float) cloud->points[i]._PointXYZ::data[ 2 ] + error_random;
+            cloud->points[i]._PointXYZ::data[ 0 ] = (float) cloud->points[i]._PointXYZ::data[ 0 ] + RandomFloat(-error, error);
+            cloud->points[i]._PointXYZ::data[ 1 ] = (float) cloud->points[i]._PointXYZ::data[ 1 ] + RandomFloat(-error, error);
+            cloud->points[i]._PointXYZ::data[ 2 ] = (float) cloud->points[i]._PointXYZ::data[ 2 ] + RandomFloat(-error, error);
         }
     }
 }
@@ -298,15 +297,24 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr vanilla_icp(pcl::PointCloud<pcl::PointXYZ>::
     pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ> registration;
     registration.setInputSource(sourceCloud);
     registration.setInputTarget(targetCloud);
+    // Set the max correspondence distance to 5cm (e.g., correspondences with higher distances will be ignored)
+    registration.setMaxCorrespondenceDistance (0.1);
+    // Set the maximum number of iterations (criterion 1)
+    registration.setMaximumIterations (50);
+    // Set the transformation epsilon (criterion 2)
+    registration.setTransformationEpsilon (1e-8);
+    // Set the euclidean distance difference epsilon (criterion 3)
+    registration.setEuclideanFitnessEpsilon (1);
 
     registration.align(*finalCloud);
-    if (registration.hasConverged())
-    {
+
+    if (registration.hasConverged()){
         std::cout << "ICP converged." << std::endl
                   << "The score is " << registration.getFitnessScore() << std::endl;
-        std::cout << "Transformation matrix:" << std::endl;
-        std::cout << registration.getFinalTransformation() << std::endl;
-    }
+        // std::cout << "Transformation matrix:" << std::endl;
+        // std::cout << registration.getFinalTransformation() << std::endl;  
+    }  
+    
     else std::cout << "ICP did not converge." << std::endl;
 
     return finalCloud;
