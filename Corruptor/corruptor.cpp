@@ -2,8 +2,12 @@
 
 
 int main (int argc, char** argv) {
-    srand(time(0));
-    if (argc < 3) {
+    // Mejor Random
+      struct timeval time; 
+      gettimeofday(&time,NULL);
+      srand((time.tv_sec * 1000) + (time.tv_usec / 1000));
+      // End Mejor Random
+      if (argc < 3) {
         std::cerr << "============ HELP ==============" << std::endl;
         std::cerr << "Usage: " << argv[0] << " <filename.pcd> <size>" << std::endl;
         std::cerr << "============ /HELP ==============" << std::endl;
@@ -54,7 +58,8 @@ int main (int argc, char** argv) {
         float percent = array[i-1];
        
         if (percent != 1.0){
-
+            // random de error. se multiplica por percent
+            float error = 0.1 * percent;
             corrupt(vertices, percent);
         }
 

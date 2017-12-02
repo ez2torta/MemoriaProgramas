@@ -21,6 +21,14 @@ bool has_suffix(const std::string &str, const std::string &suffix)
 
 
 int main (int argc, char* argv[]){
+
+  if (argc < 6  ) {
+      std::cerr << "============ HELP ==============" << std::endl;
+      std::cerr << "Usage: " << argv[0] << " <filename.obj|ply> <-v|--voxel> <-i|--i> <size_of_voxel_m> <max_error>" << std::endl;
+      std::cerr << "============ /HELP ==============" << std::endl;
+      return 1;
+  }
+
   // The point clouds we will be using
   PointCloudT::Ptr cloud_in (new PointCloudT);  // Original point cloud
   PointCloudT::Ptr cloud_out (new PointCloudT);  // Transformed point cloud
@@ -46,20 +54,23 @@ int main (int argc, char* argv[]){
     return (-1);  
   }
 
-  std::cout << cloud_in->size () << " points " <<  std::endl;
+  // std::cout << cloud_in->size () << " points " <<  std::endl;
 
   *cloud_out = *cloud_in;
 
-  // Deformar la forma
-  float error = 0.02f;
-  corrupt2(cloud_out, error);
-  std::cout << "Corrupción Completa" << std::endl;
-  
   
   std::string arg2(argv[2]);
   std::string arg3(argv[3]);
   std::string size(argv[4]); 
+  std::string error_str(argv[5]);
+  
   float size_to_f = std::atof(size.c_str());
+
+  // Deformar la forma
+  // float error = 0.02f;
+  float error = std::atof(error_str.c_str());
+  corrupt2(cloud_out, error);
+  // std::cout << "Corrupción Completa con deformacion = " << error_str << std::endl;
   
 
   // Parametros de Distancias
@@ -71,12 +82,12 @@ int main (int argc, char* argv[]){
   float dist_max_y = p_max._PointXYZ::data[1] - p_min._PointXYZ::data[1];
   float dist_max_z = p_max._PointXYZ::data[2] - p_min._PointXYZ::data[2];
 
-  std::cout << "Distancias Máximas: " << dist_max_x << " " << dist_max_y << " " << dist_max_z << std::endl;
+  // std::cout << "Distancias Máximas: " << dist_max_x << " " << dist_max_y << " " << dist_max_z << std::endl;
 
 
   if (arg3 == "-i" || arg3 == "--icp"){
     // Voxelizar el source y el corrupto
-    std::cout << "Aplicando ICP " << std::endl;
+    // std::cout << "Aplicando ICP " << std::endl;
     // cloud out => source
     // cloud in => target
     // queremos que el cloud_out se transforme en cloud_in
@@ -95,7 +106,7 @@ int main (int argc, char* argv[]){
 
   if (arg2 == "-v" || arg2 == "--voxel"){
     // Voxelizar el source y el corrupto
-    std::cout << "Voxelizando con tamaño " << size << std::endl;
+    // std::cout << "Voxelizando con tamaño " << size << std::endl;
     transformed_cloud1 = voxel_cloud(transformed_cloud1, size_to_f);
     transformed_cloud2 = voxel_cloud(transformed_cloud2, size_to_f);
   }

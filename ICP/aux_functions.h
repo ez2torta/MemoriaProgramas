@@ -309,13 +309,13 @@ pcl::PointCloud<pcl::PointXYZ>::Ptr vanilla_icp(pcl::PointCloud<pcl::PointXYZ>::
     registration.align(*finalCloud);
 
     if (registration.hasConverged()){
-        std::cout << "ICP converged." << std::endl
-                  << "The score is " << registration.getFitnessScore() << std::endl;
+        // std::cout << "ICP converged." << std::endl
+                  // << "The score is " << registration.getFitnessScore() << std::endl;
         // std::cout << "Transformation matrix:" << std::endl;
         // std::cout << registration.getFinalTransformation() << std::endl;  
     }  
     
-    else std::cout << "ICP did not converge." << std::endl;
+    // else std::cout << "ICP did not converge." << std::endl;
 
     return finalCloud;
 }

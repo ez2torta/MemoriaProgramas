@@ -1,0 +1,2 @@
+botella con silla.pcd
+size 0.1
